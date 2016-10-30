@@ -5,26 +5,34 @@ date: "October 30, 2016"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+#A brief introduction to Intermediate RMarkdown.
+
+`RMarkdown` is an incredibly poweful platform for developing interactive or static documents that include stylistic elements, but also include elements of analytic code.
+
+RMarkdown effectively pipes a `markdown` document through an R Console, merges the output and then processes it using `pandoc`.  Just as with the R ecosystem itself, as you begin to bring in external packages there is an enormous breadth to the kinds of products you can generate with RMarkdown (see the [RStudio template gallery](http://rmarkdown.rstudio.com/gallery.html)).  From standalone documents, to books, webpages and more, RMarkdown can be an important tool for generating reproducible research in the R environment.
+
+## Getting Started
+
+The first thing to do is to create a new document.  You can edit RMardown files using any kind of editor, as long as the file ends up as a text-based file.  The function that renders RMarkdown into a particular output type is `render` in the `rmarkdown` package, so you can run it from an R console, or from the commandline as:
+
+```bash
+Rscript -e "rmarkdown::render('Goring_RmarkdownTutorial.Rmd')"
 ```
 
-## R Markdown
+Let's take a look at the `Rmd` file and the output.  I've tried to make this part of the commit history of the GitHub project.  We'll see how well this holds up :)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+* [Original `Rmd` file](https://github.com/SimonGoring/LearningToRMarkdown/blob/6d1968dcd4e49c1a2e884813b4c1b9ad5e62a005/Goring_RMarkdownTutorial.Rmd)
+* [Original `html` output](http://htmlpreview.github.io/?https://github.com/SimonGoring/LearningToRMarkdown/blob/6d1968dcd4e49c1a2e884813b4c1b9ad5e62a005/Goring_RMarkdownTutorial.html)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+So this gives us a good start, but it's only a start.  Your next step is probably to remove all the content and start over.  That was my next step, replacing the content of the RMarkdown template, and replacing it with content up to the end of this introduction.  I'm going to commit it as well and render, so you can see how the HTML and Rmd files change.
 
-```{r cars}
-summary(cars)
-```
+## The YAML Header
 
-## Including Plots
+## Chunk Elements
 
-You can also embed plots, for example:
+## Styling Your Web Pages
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+## Styling your Word Documents
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Adding a Bibliography
+
