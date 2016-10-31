@@ -49,7 +49,7 @@ There's a surprising amount of extra code in RMarkdown documents.  The raw file 
 
 ### Nested Lists in YAML
 
-Lets play with different themes.  You can download this document and modify the theme by changing the key-pair `output: html_document` to a YAML-type list:
+Lets play with different themes.  You can [download this document](https://raw.githubusercontent.com/SimonGoring/LearningToRMarkdown/9e7eecb541e95787aece7ffd62baf840370d2aba/Goring_RMarkdownTutorial.Rmd) and modify the theme by changing the key-pair `output: html_document` to a YAML-type list:
 
 ```yaml
 ---
@@ -64,7 +64,46 @@ output:
 
 By indenting the carriage returns we've created a list.  RMarkdown supports multiple output types.  [My ESA2016 presentation](http://htmlpreview.github.io/?https://github.com/SimonGoring/Hacking_Disciplines-ESA2016_IGN5-4/blob/master/Goring_HackingDisciplines.html) in Mozilla Science R Study Group alumni Andrew MacDonald's Ignite session was generated using `revealjs::revealjs_presentation` as the output type, along with its associated output options.
 
+There are more themes available, along with code highlighting on the [RStudio RMarkdown html_document page](http://rmarkdown.rstudio.com/html_document_format.html#appearance_and_style).
+
 ## Chunk Elements
+
+As you continue developing your content you can add in code blocks, source external code, add tables and figures, as we've seen before.
+
+For this section I will read in some content, create a table from the head of the content, and show you how to generate captions.  I'll also add some code options.  One great thing about using the `captioner` package is that is was developed by [Althea Letaw](https://github.com/adletaw), a UBC researcher in the Zoology Department.
+
+```{r, results = "hide", message = FALSE}
+library(captioner, quietly = TRUE, verbose = FALSE)
+
+# Initialize our caption types:
+figs <- captioner(prefix = "Figure")
+tabs <- captioner(prefix = "Table")
+
+library(analogue, quietly = TRUE, verbose = FALSE)
+data(abernethy)
+
+figs(name = "bet_pol", "Plot of *Betula* pollen against time from Abernethy Forest in Scotland.")
+
+plot(Betula ~ Age, data = abernethy, type = "b")
+
+```
+
+`r figs("bet_pol")`
+
+This now gives us a figure and a citation for `r figs("bet_pol", display = "cite")`, using the `captioner` package.  There are likely other ways to build the citation, but this works well for me.  The one issue is that there are cases where you may want to generate and reference citations out of order because of coding flow choices.  It may result in unexpected behaviour.
+
+You can change the plotting size in your document by adding `fig_width` and `fig_height` options to the code chunk, but you can also edit your YAML header if you want to maintain consistent heights.
+
+```{r, results = "hide", message = FALSE}
+figs(name = "gram_pol", "Plot of Gramineae pollen against time from Abernethy Forest in Scotland.")
+
+plot(Gramineae ~ Age, data = abernethy, type = "b")
+
+```
+
+`r figs("gram_pol")`
+
+Take some time to download this version of the repository and edit the chunks and the YAML header.  Make the figures equal sizes, make then different sizes, try both.  Which over-rides which?
 
 ## Styling Your Web Pages
 
