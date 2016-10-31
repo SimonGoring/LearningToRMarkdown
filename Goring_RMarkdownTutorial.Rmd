@@ -28,6 +28,42 @@ So this gives us a good start, but it's only a start.  Your next step is probabl
 
 ## The YAML Header
 
+The first thing you might notice when you look at your new RMarkdown document is a curious set of code separated by a set of dashes.  It looks something like this:
+
+```yaml
+---
+title: "Learning to RMarkdown"
+author: "Simon Goring"
+date: "October 30, 2016"
+output: html_document
+---
+```
+
+This is YAML.  YAML is a way of conveying structured information that was developed to be human readable.  While YAML originally meant "*Yet Another Markup Language*", the original authors were computer scientists and so prefered the recursive "*YAML Ain't Markup Language*".  The reason for this is that YAML is not a markup language, it is a way of conveying structured data.  Because YAML uses no braces, only tabs and carriage returns, it is easier for a person to understand.  However, its apparent stylistic simplicity is not limiting.  YAML can pass very complex data structures.
+
+For RMarkdown documents we don't generally need a lot of complexity.  Our first set of edits rendered something that produces [a fairly passable HTML page](http://htmlpreview.github.io/?https://github.com/SimonGoring/LearningToRMarkdown/blob/b88f2cf7bf99612a90ab56769f63396190513108/Goring_RMarkdownTutorial.html).
+
+You can see how the various elements are rendered to HTML.  The key pair `title: "Learning to RMarkdown"` (note that you must always use a space after the colon) is converted to text with the `<title>` tag in HTML.  There is a wack of CSS code, and some `<meta>` tags are declared for document metadata.
+
+There's a surprising amount of extra code in RMarkdown documents.  The raw file at this stage is 600KB of code, which is big for so little (valuable) content.  This is a function of how the `html_document` is generated.  We can change the attributes of the document by modifiying the YAML.
+
+### Nested Lists in YAML
+
+Lets play with different themes.  You can download this document and modify the theme by changing the key-pair `output: html_document` to a YAML-type list:
+
+```yaml
+---
+title: "Learning to RMarkdown"
+author: "Simon Goring"
+date: "October 30, 2016"
+output:
+  html_document:
+    theme: "lumen"
+---
+```
+
+By indenting the carriage returns we've created a list.  RMarkdown supports multiple output types.  [My ESA2016 presentation](http://htmlpreview.github.io/?https://github.com/SimonGoring/Hacking_Disciplines-ESA2016_IGN5-4/blob/master/Goring_HackingDisciplines.html) in Mozilla Science R Study Group alumni Andrew MacDonald's Ignite session was generated using `revealjs::revealjs_presentation` as the output type, along with its associated output options.
+
 ## Chunk Elements
 
 ## Styling Your Web Pages
