@@ -9,6 +9,8 @@ output:
     fig_width: 7
     fig_height: 4
     css: css/styles.css
+  word_document:
+    reference_docx: word_template.docx
 ---
 
 #A brief introduction to Intermediate RMarkdown.
@@ -147,9 +149,57 @@ By using the HTML:
 <p class="hangingindent">Goring S, Dawson A, Williams JW, Simpson G, Grimm EC, Dawson R. 2015. neotoma: A programmatic interface to the Neotoma Paleoecological database.<i>Open Quaternary</i> <b>1</b>:2. [<a href="http://www.openquaternary.com/article/10.5334/oq.ab/">Open Access</a>]</p>
 ```
 
-This requires the addition of a CSS file, which you can [see in this commit](https://github.com/SimonGoring/LearningToRMarkdown/tree/a1acbad36901714271958ed42784eb7bb921e613/css).  CSS is a common feature of modern webages.  It stands for "Cascading Style Sheet" and you can read more about it on the [Wikipedia page for CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets).  It's possible to copy and paste, or otherwise write your own styles for particular elements of the sheet.  When you do this you can provide a richer HTML document than the defaults allow.  That said, it also makes things more complicated.  So lets try to make things easy, using Word.
+This requires the addition of a CSS file, which you can [see in this commit](https://github.com/SimonGoring/LearningToRMarkdown/tree/a1acbad36901714271958ed42784eb7bb921e613/css).  CSS is a common feature of modern webages.  It stands for "Cascading Style Sheet" and you can read more about it on the [Wikipedia page for CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets).  It's possible to copy and paste, or otherwise write your own styles for particular elements of the sheet.  When you do this you can provide a richer HTML document than the defaults allow.  
+
+If you want to include some sort of header bar, or footer bar, for example, if you want all your pages to have a similar feel you can use the YAML tags:
+
+```html
+    includes:
+      before_body: header.html
+      after_body: footer.html
+```
+
+This will add stand-alone HTML documents before and after the rendered document.  If you're generating a lot of reports, as I have been doing for these [Neotoma dataset landing pages](http://htmlpreview.github.io/?https://github.com/NeotomaDB/neotomadb.github.io/blob/master/dataset/1050/index.html) it helps keep your markdown document clean by allowing you to directly [link from another file](http://htmlpreview.github.io/?https://github.com/NeotomaDB/AssignDOIs/blob/master/builder/header.html).
+
+That said, it also makes things more complicated.  So lets try to make things easy, using Word.
 
 ## Styling your Word Documents
 
+Many of us are more comfortable using Word, and, if you're in a large collaboration, your collaborators might also be using Word for editing and revising.  You may also be interested in using Word to write your thesis.
+
+Word uses a lot of different markup styles:
+
+<img src="images/WordStyleBar.png">
+
+You might notice that the ones in the image are different than the default styles.  It's because I hate cerulian, so I edited my Word styles and save the document.
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">To me cerulean will always be <a href="https://twitter.com/hashtag/003FFF?src=hash">#003FFF</a>. New question, how many hex triplets are also twitter hash tags? :)</p>&mdash; Simon Goring (@sjGoring) <a href="https://twitter.com/sjGoring/status/793198250266234881">October 31, 2016</a></blockquote>
+<script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+The nice thing about RMarkdown is that you can use an existing word document as a template.  Under your `output` block in the YAML header you can add:
+
+```yaml
+  word_document:
+    reference_docx: word_template.docx
+```
+This word template was added as part of a commit that also included the following, very creepy (and totally real) Halloween image:
+
+<img src="images/guDiacE.gif">
+
+So now, if we download the appropriate files, modify the YAML and render the document, we should get a new Word file.  Give it a shot.
+
 ## Adding a Bibliography
 
+RMarkdown works with Bibtex type bibliographic files.  It's possible to get bibtex from things like Google Scholar directly, or export them from your reference manager.
+
+<img src="images/bibtex_ref.png">
+
+To add in references to your Markdown file you need to do three things:
+
+1.  Create a bibtex file for your references & cite it in your YAML header using `bibliography: file_name.bib`
+2.  Choose an appropriate style using one of many `csl` files.  [The Citation Style Language GitHub repository](https://github.com/citation-style-language/styles) has over a thousand styles to choose from.  Copy it to your project directory and add: `csl: elsevier-harvard.csl` to your YAML header.
+3. Cite the references using the format `[@referenceOne;@referenceTwo]`, or `[-@ReferenceThree]` if you want to exclude the citation year.
+
+Easy peasy!
+
+I have now run out of time :)
