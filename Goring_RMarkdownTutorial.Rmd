@@ -2,7 +2,14 @@
 title: "Learning to RMarkdown"
 author: "Simon Goring"
 date: "October 30, 2016"
-output: html_document
+output: 
+  html_document:
+    theme: "lumen"
+    fig_width: 7
+    fig_height: 4
+    echo: false
+    message: false
+    
 ---
 
 #A brief introduction to Intermediate RMarkdown.
@@ -103,9 +110,33 @@ plot(Gramineae ~ Age, data = abernethy, type = "b")
 
 `r figs("gram_pol")`
 
-Take some time to download this version of the repository and edit the chunks and the YAML header.  Make the figures equal sizes, make then different sizes, try both.  Which over-rides which?
+Take some time to [download this version](https://github.com/SimonGoring/LearningToRMarkdown/blob/cfbac5f5ec541fbfc8dbff1bc1d9b3c811f38200/Goring_RMarkdownTutorial.Rmd) of the repository and edit the chunks and the YAML header.  Make the figures equal sizes, make then different sizes, try both.  Which over-rides which?
 
 ## Styling Your Web Pages
+
+I've now added some elements to the header so my figures are plotted uniformly, what about tables?  There are several ways to print out tables, using raw R, `knitr`'s `kable()` function, or you can use paged HTML tables by modifying the header.
+
+Try these options out on this version of the document, using the following code element:
+
+```{r, results = "hide", echo = FALSE, message = FALSE}
+tabs("abe_pln", "Plain table using RMarkdown.")
+tabs("abe_knt", "kable table using RMarkdown.")
+```
+
+```{r, results = "as-is", echo = FALSE, message = FALSE}
+
+head(abernethy[,1:5])
+
+knitr::kable(head(abernethy[,1:5]))
+```
+
+So, you can see how these different versions make differences in the table plotting.  Try changing the header by adding:
+
+```
+   df_print: paged
+```
+
+to the YAML header.
 
 ## Styling your Word Documents
 
