@@ -5,11 +5,10 @@ date: "October 30, 2016"
 output: 
   html_document:
     theme: "lumen"
+    mathjax: null
     fig_width: 7
     fig_height: 4
-    echo: false
-    message: false
-    
+    css: css/styles.css
 ---
 
 #A brief introduction to Intermediate RMarkdown.
@@ -116,27 +115,39 @@ Take some time to [download this version](https://github.com/SimonGoring/Learnin
 
 I've now added some elements to the header so my figures are plotted uniformly, what about tables?  There are several ways to print out tables, using raw R, `knitr`'s `kable()` function, or you can use paged HTML tables by modifying the header.
 
-Try these options out on this version of the document, using the following code element:
+Try these options out on [this version of the document](https://github.com/SimonGoring/LearningToRMarkdown/blob/2437ae4a54181bd8c35eb7f91be6e093213094e3/Goring_RMarkdownTutorial.Rmd), using the following code element:
 
 ```{r, results = "hide", echo = FALSE, message = FALSE}
 tabs("abe_pln", "Plain table using RMarkdown.")
 tabs("abe_knt", "kable table using RMarkdown.")
 ```
 
+`r tabs("abe_pln")`
+
 ```{r, results = "as-is", echo = FALSE, message = FALSE}
+(head(abernethy[,1:5]))
+```
 
-head(abernethy[,1:5])
+`r tabs("abe_knt")`
 
+```{r, results = "as-is", echo = FALSE, message = FALSE}
 knitr::kable(head(abernethy[,1:5]))
 ```
 
-So, you can see how these different versions make differences in the table plotting.  Try changing the header by adding:
+You can see how these different versions change how your data appears.  `kable()` has a lot of different options to change the model styling.  There are other ways of making pretty tables in RMarkdown, including generating them by hand.  I would generally suggest automating it as much as possible though.
 
-```
-   df_print: paged
+You can also embed HTML code chunks, scripts, paragraph styling and others.  For example, you could push references with hanging indents that look like this:
+
+<p class="hangingindent">Goring S, Dawson A, Williams JW, Simpson G, Grimm EC, Dawson R. 2015. neotoma: A programmatic interface to the Neotoma Paleoecological database.<i>Open Quaternary</i> <b>1</b>:2. [<a href="http://www.openquaternary.com/article/10.5334/oq.ab/">Open Access</a>]</p>
+
+By using the HTML:
+
+```html
+
+<p class="hangingindent">Goring S, Dawson A, Williams JW, Simpson G, Grimm EC, Dawson R. 2015. neotoma: A programmatic interface to the Neotoma Paleoecological database.<i>Open Quaternary</i> <b>1</b>:2. [<a href="http://www.openquaternary.com/article/10.5334/oq.ab/">Open Access</a>]</p>
 ```
 
-to the YAML header.
+This requires the addition of a CSS file, which you can [see in this commit](https://github.com/SimonGoring/LearningToRMarkdown/tree/a1acbad36901714271958ed42784eb7bb921e613/css).  CSS is a common feature of modern webages.  It stands for "Cascading Style Sheet" and you can read more about it on the [Wikipedia page for CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets).  It's possible to copy and paste, or otherwise write your own styles for particular elements of the sheet.  When you do this you can provide a richer HTML document than the defaults allow.  That said, it also makes things more complicated.  So lets try to make things easy, using Word.
 
 ## Styling your Word Documents
 
