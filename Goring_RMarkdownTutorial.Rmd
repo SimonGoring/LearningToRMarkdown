@@ -53,7 +53,7 @@ For RMarkdown documents we don't generally need a lot of complexity.  Our first 
 
 You can see how the various elements are rendered to HTML.  The key pair `title: "Learning to RMarkdown"` (note that you must always use a space after the colon) is converted to text with the `<title>` tag in HTML.  There is a wack of CSS code, and some `<meta>` tags are declared for document metadata.
 
-There's a surprising amount of extra code in RMarkdown documents.  The raw file at this stage is 600KB of code, which is big for so little (valuable) content.  This is a function of how the `html_document` is generated.  We can change the attributes of the document by modifiying the YAML.
+There's a surprising amount of extra code in RMarkdown documents.  The raw file at this stage is 600KB of code, which is big for so little (valuable) content.  This is a function of how the `html_document` is generated.  We can change the attributes of the document by modifiying the YAML.  In particular we could use the flag `self_contained: false` to split out the raw HTML and all included files & scripts.  What happens when you use that?  How big is your file now?
 
 ### Nested Lists in YAML
 
